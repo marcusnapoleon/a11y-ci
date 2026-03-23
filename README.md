@@ -1,3 +1,6 @@
+[![GitHub Actions](https://github.com/marcusnapoleon/a11y-ci/actions/workflows/a11y-pipe.yml/badge.svg)](https://github.com/marcusnapoleon/a11y-ci/actions)
+
+
 
 ## Accessibility pipeline using AXE-Core
 
