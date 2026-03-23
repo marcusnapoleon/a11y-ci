@@ -5,9 +5,11 @@
 ## Accessibility Pipeline - GitHub-Actions
 
 
-[![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-Accessibility%20Pipeline-blue)](https://github.com/marcusnapoleon/a11y-ci/actions)
+[![CI/CD](https://img.shields.io/badge/CI%2FCD-Accessibility%20Pipeline-blue)](https://github.com/marcusnapoleon/a11y-ci/actions)
 [![WCAG](https://img.shields.io/badge/WCAG-2.2%20AA-green)](https://www.w3.org/TR/WCAG22/)
-[![Lighthouse](https://img.shields.io/badge/Lighthouse-100%2F100-brightgreen)](https://developer.chrome.com/docs/lighthouse/overview/)
+[![Accessibility Score](https://img.shields.io/badge/Accessibility-100%2F100-brightgreen)](https://developer.chrome.com/docs/lighthouse/accessibility/)
+[![axe-core](https://img.shields.io/badge/axe--core-0%20violations-success)](https://github.com/dequelabs/axe-core)
+
 
 Automated accessibility testing pipeline using **Lighthouse**, **axe-core**, and **HTML/CSS linting**. Demonstrates progressive remediation from 46 accessibility errors to full WCAG 2.2 AA compliance.
 
