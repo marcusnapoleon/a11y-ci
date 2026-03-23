@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Survey – 75% Lint Fixed</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 id="title">Game Subscription Service Form</h1>
+    <p id="description"><em>Please kindly complete the form below, fields marked with "<sup>*</sup>" are required.</em></p>
+
+    <form id="survey-form">
+        <div class="rowTab">
+            <div class="labels">
+                <label for="name" id="name-label"><sup>*</sup>Name:</label>
+            </div>
+            <div class="rightTab">
+                <input type="text" id="name" name="user_name" placeholder="Enter your name here" class="inpt" required>
+            </div>
+        </div>
+
+        <div class="rowTab">
+            <div class="labels">
+                <label for="email" id="email-label"><sup>*</sup>Email:</label>
+            </div>
+            <div class="rightTab">
+                <input type="email" id="email" placeholder="email@sample.com" class="inpt" required>
+            </div>
+        </div>
+
+        <div class="rowTab">
+            <div class="labels">
+                <label for="number" id="number-label"><sup>*</sup>Phone Number:</label>
+            </div>
+            <div class="rightTab">
+                <input type="tel" id="number" placeholder="123 456 7890" pattern="[0-9\s\-]{10,}" title="Enter 10 digits" class="inpt" required>
+            </div>
+        </div>
+
+        <div class="rowTab">
+            <div class="labels">
+                <label for="gamer-dropdown" id="dropdown-label"><sup>*</sup>Gamer Level/Experience:</label>
+            </div>
+            <div class="rightTab">
+                <select id="gamer-dropdown" name="gamer_experience" class="inpt" required>
+                    <option value="">-- Select your experience level --</option>
+                    <option value="casual">Casual Gamer - 2 to 5 hours gametime/week</option>
+                    <option value="regular">Regular - 5 to 12 hours gametime/week</option>
+                    <option value="advanced">Advanced - 12 to 25 hours gametime/week</option>
+                    <option value="pro">Pro - 25 hours or more gametime/week</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="columns-wrapper">
+            <div class="column">
+                <fieldset>
+                    <legend>How do you game?</legend>
+                    <p>
+                        <label><input type="radio" name="game-rig" value="SONY-Playstation"> SONY Playstation</label>
+                        <label><input type="radio" name="game-rig" value="Microsoft-XBOX"> Microsoft XBOX</label>
+                        <label><input type="radio" name="game-rig" value="Nintendo-Entertainment-Systems"> Nintendo (NES)</label>
+                        <label><input type="radio" name="game-rig" value="Android/iOS"> Android/iOS</label>
+                        <label><input type="radio" name="game-rig" value="Gaming-PC/Laptop"> Gaming PC/Laptop</label>
+                    </p>
+                </fieldset>
+            </div>
+            <div class="column">
+                <fieldset>
+                    <legend>What do you play?</legend>
+                    <p>
+                        <label><input type="checkbox" name="game-genre" value="Action"> Action</label>
+                        <label><input type="checkbox" name="game-genre" value="Action/Adventure"> Action/Adventure</label>
+                        <label><input type="checkbox" name="game-genre" value="Adventure"> Adventure</label>
+                        <label><input type="checkbox" name="game-genre" value="Role-playing"> Role-playing</label>
+                        <label><input type="checkbox" name="game-genre" value="Simulation"> Simulation</label>
+                        <label><input type="checkbox" name="game-genre" value="Strategy"> Strategy</label>
+                        <label><input type="checkbox" name="game-genre" value="Sports"> Sports</label>
+                    </p>
+                </fieldset>
+            </div>
+        </div>
+
+        <label for="comments" id="cmts">We'd love to hear from you, please kindly provide any comments or suggestions:</label>
+        <textarea id="comments" placeholder="Enter your comments here"></textarea>
+
+        <button type="submit" id="submit">Submit</button>
+    </form>
+
+    <p id="built">Site built by Marcus Lising for educational purposes (freeCodeCamp)</p>
+</body>
+</html>
