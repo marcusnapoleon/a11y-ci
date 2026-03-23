@@ -182,7 +182,7 @@ Marcus Napoleon — Accessibility Portfolio Project
 Built as part of an accessibility remediation case study. Demonstrates CI/CD automation for WCAG compliance testing.
 
 
-This README:
+🚀 This README:
 - ✅ Clearly states the project purpose
 - ✅ Shows your technical stack
 - ✅ Documents the workflow logic
@@ -190,4 +190,4 @@ This README:
 - ✅ Includes setup instructions
 - ✅ Is professional and portfolio-ready
 
-Want me to adjust anything? 🚀
+
