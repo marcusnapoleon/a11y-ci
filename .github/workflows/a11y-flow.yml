@@ -1,1 +1,110 @@
 
+name: Accessibility Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install linters
+        run: npm install -g htmlhint stylelint stylelint-config-standard
+
+      - name: Lint progression folders
+        run: |
+          echo "=== Linting Lint-30 ==="
+          htmlhint "Lint-30/**/*.html" || true
+          stylelint "Lint-30/**/*.css" || true
+
+          echo "=== Linting Lint-75 ==="
+          htmlhint "Lint-75/**/*.html" || true
+          stylelint "Lint-75/**/*.css" || true
+
+          echo "=== Linting wcag-2.0 ==="
+          htmlhint "WCAG-20/**/*.html" || true
+          stylelint "WCAG-20/**/*.css" || true
+
+          echo "=== Linting wcag-2.1 ==="
+          htmlhint "WCAG-21/**/*.html" || true
+          stylelint "WCAG-21/**/*.css" || true
+
+          echo "=== Linting docs ==="
+          htmlhint "Accessible/**/*.html"
+          stylelint "Accessible/**/*.css"
+         
+  axe:
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install serve, axe-core, and browser-driver-manager
+        run: |
+          npm install -g serve
+          npm install -g @axe-core/cli
+          npm install -g browser-driver-manager
+
+      - name: Install matching ChromeDriver
+        run: npx browser-driver-manager install chrome
+
+      - name: Run axe on progression versions
+        run: |
+          npx serve . -p 8080 &
+          sleep 5
+
+          echo "=== Testing wcag-2.0 ==="
+          npx axe http://localhost:8080/WCAG-20/index.html --exit || true
+
+          echo "=== Testing wcag-2.1 ==="
+          npx axe http://localhost:8080/WCAG-21/index.html --exit || true
+
+          echo "=== Testing Accessible ==="
+          npx axe http://localhost:8080/Accessible/index.html --exit
+
+          kill $(lsof -t -i:8080) || true
+
+
+  lighthouse:
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install serve and Lighthouse
+        run: |
+          npm install -g serve
+          npm install -g lighthouse
+
+      - name: Run Lighthouse on Accessible version
+        run: |
+          npx serve . -p 8080 &
+          sleep 5
+          npx lighthouse http://localhost:8080/Accessible/index.html --output json --output-path lighthouse-report.json --chrome-flags="--headless"
+          kill $(lsof -t -i:8080) || true
+
+      - name: Upload Lighthouse report
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-report
+          path: lighthouse-report.json
