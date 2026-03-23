@@ -2,20 +2,8 @@
 
 
 
-## Accessibility pipeline using AXE-Core
+## Accessibility Pipeline - GitHub-Actions
 
-# a11y-ci | Main :
-- Initial — Broken (2019 HTML/CSS)    → 46 accessibility errors
-  
-# cd-dev | Branch (feature/progression) :
-- Lint-30                             → First round of HTML/CSS fixes applied (~30%)
-- Lint-75                             → Second round of HTML/CSS fixes applied (~75%)
-- WCAG 2.0                            → WCAG 2.0 AA issues fixed
-- WCAG 2.1                            → WCAG 2.1 AA issues fixed
-- Final — Remediated (2026)           → Fully WCAG 2.2 AA compliant → 0 accessibility errors
-
-  
-# a11y-ci — Accessibility Pipeline with GitHub Actions
 
 [![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-Accessibility%20Pipeline-blue)](https://github.com/marcusnapoleon/a11y-ci/actions)
 [![WCAG](https://img.shields.io/badge/WCAG-2.2%20AA-green)](https://www.w3.org/TR/WCAG22/)
@@ -59,20 +47,17 @@ a11y-ci/
 
 ### Branch Strategy
 
-| Branch | Purpose |
-|--------|---------|
-| **main** | Broken baseline (`Inaccessible/`) — shows initial state |
-| **cd-dev** | Fixed versions — all remediation folders |
+#### a11y-ci | Main :
+- Inaccessible | Initial — Broken (2019 HTML/CSS) → 46 accessibility errors
+  
+#### cd-dev | Branch (remediations/progression) :
+- Accessible | Final — Remediated (2026) → Fully WCAG 2.2 AA compliant → 0 accessibility errors
+- Lint-30                            → First round of HTML/CSS fixes applied (~30%)
+- Lint-75                            → Second round of HTML/CSS fixes applied (~75%)
+- WCAG-20                            → WCAG 2.0 AA issues fixed
+- WCAG-21                            → WCAG 2.1 AA issues fixed
 
-### Remediation Folders (cd-dev branch)
 
-| Folder | Description |
-|--------|-------------|
-| `Lint-30/` | First round of HTML/CSS fixes (~30% improvement) |
-| `Lint-75/` | Second round of HTML/CSS fixes (~75% improvement) |
-| `wcag-2.0/` | WCAG 2.0 AA issues fixed |
-| `wcag-2.1/` | WCAG 2.1 AA issues fixed |
-| `Accessible/` | Final version — fully WCAG 2.2 AA compliant |
 
 ---
 
