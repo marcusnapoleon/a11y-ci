@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>Inaccessible freeCodeCamp Survey Form Project</title>
+
+    <!--  <link rel="stylesheet" href="css/style.css">  -->
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Poiret+One">
+    	<!-- Favicon -->
+        <link rel="icon" type="image/x-icon" href="favicon.ico">
+      	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
+      	<!-- Favicon -->
+</head>
+
+<body id="form-container">
+    <div>
+        <h1 id="title">Game Subscription Service Form</h1>
+    </div>
+    <p id="description">
+        <em>Please kindly complete the form below, fields marked with "<sup>*</sup>" are required.</em>
+    </p>
+
+
+
+    <form id="survey-form">
+
+        <div class="rowTab">
+            <div class="labels">
+                <label id="name-label"><sup> *</sup>Name:</label>
+            </div>
+            <div class="rightTab">
+                <input autofocus="" type="text" id="name" placeholder="Enter your name here" class="inpt" required>
+            </div>
+        </div>
+
+
+        <div class="rowTab">
+            <div class="labels">
+                <label id="email-label"><sup> *</sup>Email:</label>
+            </div>
+            <div class="rightTab">
+                <input type="email" id="email" placeholder="email@sample.com" class="inpt" required>
+            </div>
+        </div>
+
+
+        <div class="rowTab">
+            <div class="labels">
+                <label id="number-label"><sup> *</sup>Number:</label>
+            </div>
+            <div class="rightTab">
+                <input type="number" id="number" placeholder="123 456 7890" min="1111111111" max="9999999999" class="inpt" required>
+            </div>
+        </div>
+
+
+        <div class="rowTab">
+            <div class="labels">
+                <label id="dropdown-label"><sup>*</sup>Gamer Level/Experience:</label>
+            </div>
+            <div class="rightTab">
+                <select id="dropdown" class="inpt">
+                    <option >--</option>
+                    <option value="casual">Casual Gamer - 2 to 5 hours gametime/week</option>
+                    <option value="regular">Regular - 5 to 12 hours gametime/week</option>
+                    <option value="advanced">Advanced - 12 to 25 hours gametime/week</option>
+                    <option value="pro">Pro - 25 hours or more gametime/week</option>
+                </select>
+            </div>
+        </div><br>
+
+
+        <div class="column">
+            <fieldset id="radioBtn">
+                <h4>How do you game?</h4>
+                <p><input type="radio" name="game-rig" value="SONY-SportsPlaystation"> SONY Playstation<br>
+                    <input type="radio" name="game-rig" value="Microsoft-XBOX"> Microsoft XBOX<br>
+                    <input type="radio" name="game-rig" value="Nintendo-Entertainment-Systems"> Nintendo (NES)<br>
+                    <input type="radio" name="game-rig" value="Android/iOS"> Android/iOS<br>
+                    <input type="radio" name="game-rig" value="Gaming-PC/Laptop"> Gaming PC/Laptop</p><br>
+
+
+            </fieldset>
+        </div>
+        <div class="column">
+            <fieldset id="checkBox">
+                <h4>What do you play?</h4>
+                <p><input type="checkbox" name="game-genre" value="Action"> Action<br>
+                    <input type="checkbox" name="game-genre" value="Action/Adventure"> Action/Adventure<br>
+                    <input type="checkbox" name="game-genre" value="Adventure"> Adventure<br>
+                    <input type="checkbox" name="game-genre" value="Role-playing"> Role-playing<br>
+                    <input type="checkbox" name="game-genre" value="Simulation"> Simulation<br>
+                    <input type="checkbox" name="game-genre" value="Strategy"> Strategy<br>
+                    <input type="checkbox" name="game-genre" value="Sports"> Sports</p><br>
+
+
+            </fieldset>
+
+        </div>
+
+
+        <textarea placeholder="Enter your comments here"></textarea>
+        <p id="cmts">We'd love to hear from you, please kinldy provide any comments or suggestions:</p><br>
+
+
+        
+        <input type="submit" id="submit"><br><br><br>
+    </form>
+
+
+    <p id="built">Site built by Marcus Lising for educational purposes (freeCodeCamp) </p><br>
+  <p>
+<a href="http://jigsaw.w3.org/css-validator/check/referer">
+    <img style="border:0;width:88px;height:31px"
+        src="http://jigsaw.w3.org/css-validator/images/vcss-blue"
+        alt="Valid CSS!" />
+    </a>
+</p>
+</body>
+<script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+
+</html>
