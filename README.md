@@ -1,9 +1,10 @@
-# a11y-CI-CD
-Accessibility pipeline using AXE-Core
 
+## Accessibility pipeline using AXE-Core
 
-Branch: feature/progression
+# a11y-ci | Main :
 - Initial — Broken (2019 HTML/CSS)    → 46 accessibility errors
+  
+# cd-dev | Branch (feature/progression) :
 - Lint-30                             → First round of HTML/CSS fixes applied (~30%)
 - Lint-75                             → Second round of HTML/CSS fixes applied (~75%)
 - WCAG 2.0                            → WCAG 2.0 AA issues fixed
