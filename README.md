@@ -1,4 +1,4 @@
-[![GitHub Actions](https://github.com/marcusnapoleon/a11y-ci/actions/workflows/a11y-pipe.yml/badge.svg)](https://github.com/marcusnapoleon/a11y-ci/actions)
+
 
 
 
@@ -48,8 +48,6 @@ This project showcases a complete accessibility remediation workflow:
 
 ## 🏗️ Repository Structure
 a11y-ci/
-├── .github/workflows/
-│ └── a11y-pipe.yml # GitHub Actions workflow
 ├── Inaccessible/ # Baseline broken version (main branch)
 │ ├── index.html
 │ └── css/style.css
@@ -79,10 +77,10 @@ a11y-ci/
 ## 🚀🚀 GitHub Actions Pipeline
 
 The workflow runs on every pull request to `main`:
-┌─────────┐ ┌─────────┐ ┌────────────┐
-│ LINT │ → │ AXE │ → │ LIGHTHOUSE │
-│ (10s) │ │ (30s) │ │ (60s) │
-└─────────┘ └─────────┘ └────────────┘
+┌─────────┐   ┌─────────┐   ┌────────────┐
+│  LINT   | → │   AXE   │ → │ LIGHTHOUSE │
+│ (10s)   │   |  (30s)  │   │   (60s)    │
+└─────────┘   └─────────┘   └────────────┘
 ↓ ↓ ↓
 HTML/CSS WCAG 2.0/2.1/2.2 Performance + Syntax Compliance Accessibility Score
 
