@@ -77,10 +77,12 @@ a11y-ci/
 ## 🚀🚀 GitHub Actions Pipeline
 
 The workflow runs on every pull request to `main`:
+
 ┌─────────┐   ┌─────────┐   ┌────────────┐
 │  LINT   | → │   AXE   │ → │ LIGHTHOUSE │
 │ (10s)   │   |  (30s)  │   │   (60s)    │
 └─────────┘   └─────────┘   └────────────┘
+
 ↓ ↓ ↓
 HTML/CSS WCAG 2.0/2.1/2.2 Performance + Syntax Compliance Accessibility Score
 
