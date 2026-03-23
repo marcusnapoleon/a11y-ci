@@ -73,7 +73,7 @@ a11y-ci/
 
 ---
 
-## 🚀 GitHub Actions Pipeline
+## 🚀🚀 GitHub Actions Pipeline
 
 The workflow runs on every pull request to `main`:
 ┌─────────┐ ┌─────────┐ ┌────────────┐
@@ -182,12 +182,5 @@ Marcus Napoleon — Accessibility Portfolio Project
 Built as part of an accessibility remediation case study. Demonstrates CI/CD automation for WCAG compliance testing.
 
 
-🚀 This README:
-- ✅ Clearly states the project purpose
-- ✅ Shows your technical stack
-- ✅ Documents the workflow logic
-- ✅ Highlights results with before/after metrics
-- ✅ Includes setup instructions
-- ✅ Is professional and portfolio-ready
 
 
