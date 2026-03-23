@@ -48,11 +48,13 @@ This project showcases a complete accessibility remediation workflow:
 
 ## 🏗️ Repository Structure
 a11y-ci/
-├── Inaccessible/ # Baseline broken version (main branch)
-│ ├── index.html
-│ └── css/style.css
-├── .stylelintrc.json # CSS linting rules
-└── README.md
+
+- Inaccessible/ # Baseline broken version (main branch)
+  - index.html
+  - css/
+    - style.css
+  - .stylelintrc.json # CSS linting rules
+  - README.md
 
 
 ### Branch Strategy
@@ -78,10 +80,7 @@ a11y-ci/
 
 The workflow runs on every pull request to `main`:
 
-┌─────────┐   ┌─────────┐   ┌────────────┐
-│  LINT   | → │   AXE   │ → │ LIGHTHOUSE │
-│ (10s)   │   |  (30s)  │   │   (60s)    │
-└─────────┘   └─────────┘   └────────────┘
+│  LINT (10s) │ → │ AXE (30s) │ → │ LIGHTHOUSE (60s) │
 
 ↓ ↓ ↓
 HTML/CSS WCAG 2.0/2.1/2.2 Performance + Syntax Compliance Accessibility Score
