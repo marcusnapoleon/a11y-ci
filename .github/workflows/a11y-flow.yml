@@ -151,14 +151,14 @@ jobs:
             
             ### 📄 Full Report
             To download the complete Lighthouse report:
-              1. Go to the **Actions** tab above
-              2. Click on this workflow run
-              3. Download **lighthouse-report** from the **Artifacts** section
+            1. Go to the **Actions** tab above
+            2. Click on this workflow run
+            3. Download **lighthouse-report** from the **Artifacts** section
             `;
-      
-      github.rest.issues.createComment({
-        issue_number: context.issue.number,
-        owner: context.repo.owner,
-        repo: context.repo.repo,
-        body: comment
-      });
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
