@@ -73,12 +73,12 @@ jobs:
           sleep 5
 
           echo "=== Testing wcag-2.0 ==="
-          npx axe http://localhost:8080/WCAG-20/index.html --exit || true
-
+          npx axe http://localhost:8080/WCAG-20/index.html --exit
+          
           echo "=== Testing wcag-2.1 ==="
-          npx axe http://localhost:8080/WCAG-21/index.html --exit || true
+          npx axe http://localhost:8080/WCAG-21/index.html --exit
 
-          echo "=== Testing Accessible ==="
+          echo "=== Testing Accessible wcag-2.2==="
           npx axe http://localhost:8080/Accessible/index.html --exit
 
           kill $(lsof -t -i:8080) || true
