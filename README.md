@@ -73,6 +73,7 @@ The workflow runs on every pull request to `main`:
 HTML/CSS WCAG 2.0/2.1/2.2 Performance + Syntax Compliance Accessibility Score
 
 
+
 ### Pipeline Jobs
 
 | Job | Tools | What It Checks |
@@ -83,84 +84,37 @@ HTML/CSS WCAG 2.0/2.1/2.2 Performance + Syntax Compliance Accessibility Score
 
 ### Automated PR Comments
 
-Each pull request receives an automatic comment with:
-- Lighthouse scores (Performance, Accessibility, Best Practices, SEO)
-- Lint and axe-core pass/fail status
-- Link to downloadable full HTML report
+When you open a pull request, the workflow automatically posts a comment with:
 
----
+- 📊 **Lighthouse scores** (Performance, Accessibility, Best Practices, SEO)
+- ✅ **Lint and axe-core pass/fail status**
+- 📄 **Link to downloadable full report** (in Artifacts)
 
-## 📊 Results
+Example PR comment:
+```markdown
+## 📊 Lighthouse Scores
+| Metric          | Score    |
+|-----------------|----------|
+| Performance     | 97/100   |
+| Accessibility   | 100/100  |
+| Best Practices  | 96/100   |
+| SEO             | 100/100  |
 
-| Metric | Before | After | Improvement |
-|--------|--------|-------|-------------|
-| **Accessibility Score** | 68/100 | **100/100** | +32 |
-| **WCAG Violations** | 46 | **0** | -100% |
-| **Performance** | 65/100 | **97/100** | +32 |
-| **Best Practices** | 72/100 | **96/100** | +24 |
-| **SEO** | 70/100 | **100/100** | +30 |
+### ✅ Accessibility Checks
+- HTML Lint: Passed
+- CSS Lint: Passed
+- WCAG 2.0: Passed
+- WCAG 2.1: Passed
 
----
+### 📄 Full Report
+Download the Lighthouse report from the **Artifacts** section below.
+```
 
-## 🛠️ Tools Used
-
-| Tool | Purpose |
-|------|---------|
-| [Lighthouse](https://developer.chrome.com/docs/lighthouse/) | Performance & accessibility scoring |
-| [axe-core](https://github.com/dequelabs/axe-core) | WCAG compliance testing |
-| [htmlhint](https://htmlhint.com/) | HTML structure validation |
-| [stylelint](https://stylelint.io/) | CSS linting |
-| [GitHub Actions](https://github.com/features/actions) | CI/CD automation |
-
----
-
-## 🧪 Running Locally
-
-### Prerequisites
-- Node.js (v20+)
-- npm
-
-### Install Tools
-```bash
-npm install -g lighthouse @axe-core/cli htmlhint stylelint stylelint-config-standard
-
-
-# Start local server
-npx serve . -p 8080 &
-
-# Run Lighthouse
-lighthouse http://localhost:8080/Accessible/ --output=html --output-path=report.html
-
-# Run axe-core
-npx axe http://localhost:8080/Accessible/
-
-# Run HTML lint
-htmlhint "Accessible/**/*.html"
-
-# Run CSS lint
-stylelint "Accessible/**/*.css"
-
-
-📝 Case Study Highlights
-Key Insights
-Linting catches 74% of issues — Basic HTML/CSS structure fixes resolved 34 of 46 errors before running axe-core.
-
-Manual testing is essential — Screen reader testing (NVDA, VoiceOver) and keyboard navigation identified issues automation couldn't.
-
-Progressive remediation works — Lint-30 → Lint-75 → WCAG 2.0 → WCAG 2.1 → WCAG 2.2 created a clear improvement path.
-
-Testing Methods Used
-Type	Tools
-Automated	Lighthouse, axe-core, WAVE, ARC Toolkit
-Manual	NVDA (Windows), VoiceOver (iOS), keyboard navigation, zoom testing (200%)
 📚 Resources
-Web Content Accessibility Guidelines (WCAG) 2.2
-
-Lighthouse Documentation
-
-axe-core Rules
-
-GitHub Actions Documentation
+- Web Content Accessibility Guidelines (WCAG) 2.2
+- Lighthouse Documentation
+- AXE-Core Rules
+- GitHub Actions Documentation
 
 📄 License
 MIT
