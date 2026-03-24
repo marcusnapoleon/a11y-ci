@@ -53,12 +53,11 @@ a11y-ci/
 - Inaccessible | Initial — Broken (2019 HTML/CSS) → 46 accessibility errors
   
 #### cd-dev | Branch (remediations/progression) :
+- Lint-30                                → First round of HTML/CSS fixes applied (~30%)
+- Lint-75                                → Second round of HTML/CSS fixes applied (~75%)
+- WCAG-20                                → WCAG 2.0 AA issues fixed
+- WCAG-21                                → WCAG 2.1 AA issues fixed
 - Accessible | Final — Remediated (2026) → Fully WCAG 2.2 AA compliant → 0 accessibility errors
-- Lint-30                            → First round of HTML/CSS fixes applied (~30%)
-- Lint-75                            → Second round of HTML/CSS fixes applied (~75%)
-- WCAG-20                            → WCAG 2.0 AA issues fixed
-- WCAG-21                            → WCAG 2.1 AA issues fixed
-
 
 
 ---
@@ -104,8 +103,9 @@ Example PR comment:
 ### ✅ Accessibility Checks
 - HTML Lint: Passed
 - CSS Lint: Passed
-- WCAG 2.0: Passed
-- WCAG 2.1: Passed
+- WCAG 2.0 AA: Passed
+- WCAG 2.1 AA: Passed
+- WCAG 2.2 AA: Passed
 
 
 ### 📄 Full Report
