@@ -147,6 +147,7 @@ jobs:
             - CSS Lint: Passed
             - WCAG 2.0: Passed
             - WCAG 2.1: Passed
+            - WCAG 2.2 AA: Passed
             
             ### 📄 Full Report
             To download the complete Lighthouse report:
