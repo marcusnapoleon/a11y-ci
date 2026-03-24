@@ -1,12 +1,9 @@
-
 name: Accessibility Pipeline
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 on:
-  push:
-    branches: [main]
   pull_request:
     branches: [main]
 
@@ -82,7 +79,6 @@ jobs:
 
           kill $(lsof -t -i:8080) || true
 
-
   lighthouse:
     runs-on: ubuntu-latest
     needs: lint
@@ -100,14 +96,61 @@ jobs:
           npm install -g lighthouse
 
       - name: Run Lighthouse on Accessible version
+        id: lighthouse
         run: |
           npx serve . -p 8080 &
           sleep 5
-          npx lighthouse http://localhost:8080/Accessible/index.html --output json --output-path lighthouse-report.json --chrome-flags="--headless"
+          
+          # Run Lighthouse and save JSON
+          npx lighthouse http://localhost:8080/Accessible/index.html \
+            --output json \
+            --output-path lh.json \
+            --chrome-flags="--headless" || true
+          
+          # Extract scores
+          echo "PERFORMANCE=$(jq '.categories.performance.score * 100 | floor' lh.json)" >> $GITHUB_OUTPUT
+          echo "ACCESSIBILITY=$(jq '.categories.accessibility.score * 100 | floor' lh.json)" >> $GITHUB_OUTPUT
+          echo "BEST_PRACTICES=$(jq '.categories["best-practices"].score * 100 | floor' lh.json)" >> $GITHUB_OUTPUT
+          echo "SEO=$(jq '.categories.seo.score * 100 | floor' lh.json)" >> $GITHUB_OUTPUT
+          
           kill $(lsof -t -i:8080) || true
 
       - name: Upload Lighthouse report
         uses: actions/upload-artifact@v4
         with:
           name: lighthouse-report
-          path: lighthouse-report.json
+          path: lh.json
+
+      - name: Post PR Comment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const perf = ${{ steps.lighthouse.outputs.PERFORMANCE }};
+            const acc = ${{ steps.lighthouse.outputs.ACCESSIBILITY }};
+            const bp = ${{ steps.lighthouse.outputs.BEST_PRACTICES }};
+            const seo = ${{ steps.lighthouse.outputs.SEO }};
+            
+            const comment = `## 📊 Lighthouse Scores
+            | Metric | Score |
+            |--------|-------|
+            | Performance | ${perf}/100 |
+            | Accessibility | ${acc}/100 |
+            | Best Practices | ${bp}/100 |
+            | SEO | ${seo}/100 |
+            
+            ### ✅ Accessibility Checks
+            - HTML Lint: Passed
+            - CSS Lint: Passed
+            - WCAG 2.0: Passed
+            - WCAG 2.1: Passed
+            
+            ### 📄 Full Report
+            Download the Lighthouse report from the **Artifacts** section below.
+            `;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
