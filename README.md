@@ -92,7 +92,7 @@ When you open a pull request, the workflow automatically posts a comment with:
 
 Example PR comment:
 ```markdown
-## 📊 Lighthouse Scores
+### 📊 Lighthouse Scores
 | Metric          | Score    |
 |-----------------|----------|
 | Performance     | 97/100   |
@@ -100,14 +100,22 @@ Example PR comment:
 | Best Practices  | 96/100   |
 | SEO             | 100/100  |
 
+
 ### ✅ Accessibility Checks
 - HTML Lint: Passed
 - CSS Lint: Passed
 - WCAG 2.0: Passed
 - WCAG 2.1: Passed
 
+
 ### 📄 Full Report
-Download the Lighthouse report from the **Artifacts** section below.
+Each workflow run generates a downloadable Lighthouse report. To view it:
+1. Go to the **Actions** tab in the repository
+2. Click on any workflow run (pull request or push)
+3. Scroll to the **Artifacts** section
+4. Download **lighthouse-report**
+5. Extract and open `lh.json` to see detailed scores and recommendations
+
 ```
 
 📚 Resources
