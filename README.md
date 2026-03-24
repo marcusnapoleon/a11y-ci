@@ -120,7 +120,7 @@ Download the Lighthouse report from the **Artifacts** section below.
 MIT
 
 👤 Author
-Marcus Napoleon — Accessibility Portfolio Project
+Marcus Napoleon O. Lising — Accessibility Automation Portfolio Project
 
 Built as part of an accessibility remediation case study. Demonstrates CI/CD automation for WCAG compliance testing.
 
