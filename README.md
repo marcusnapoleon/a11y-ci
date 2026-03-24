@@ -118,14 +118,17 @@ Each workflow run generates a downloadable Lighthouse report. To view it:
 
 ```
 
+
 📚 Resources
 - Web Content Accessibility Guidelines (WCAG) 2.2
 - Lighthouse Documentation
 - AXE-Core Rules
 - GitHub Actions Documentation
 
+
 📄 License
 MIT
+
 
 👤 Author
 Marcus Napoleon O. Lising — Accessibility Automation Portfolio Project
