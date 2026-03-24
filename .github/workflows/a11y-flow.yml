@@ -145,8 +145,8 @@ jobs:
             ### ✅ Accessibility Checks
             - HTML Lint: Passed
             - CSS Lint: Passed
-            - WCAG 2.0: Passed
-            - WCAG 2.1: Passed
+            - WCAG 2.0 AA: Passed
+            - WCAG 2.1 AA: Passed
             - WCAG 2.2 AA: Passed
             
             ### 📄 Full Report
