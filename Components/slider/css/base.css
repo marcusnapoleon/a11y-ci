@@ -15,23 +15,25 @@ body {
 .panel {
   background-color: #fff;
   color: #666;
-  box-shadow: rgb(255 0 0 / 0.5);
+  box-shadow: rgba(255, 0, 0, 50%);
   overflow: auto;}
 
 .slider-panel {
   margin-top: 200px;	
 }
-
+/*
 button {
   border: none;}
-
+*/
 /********** LOGO **********/
 h1 {
   text-align: center;
   width: 200px;
   height: 100px;
   margin: 40px auto 40px auto;
-  /*background-image: url('../img/logo.png');*/
+  
+  /*  background-image: url('../img/logo.png');  */
+  
   background-repeat: no-repeat;
   text-indent: 100%;
   white-space: nowrap;
@@ -64,6 +66,7 @@ a {
     text-decoration: none;}
 
 button {
+  border: none;
   font-size: 90%;
   text-align: left;
   text-transform: uppercase;}
