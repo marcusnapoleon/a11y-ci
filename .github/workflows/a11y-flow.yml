@@ -34,8 +34,8 @@ jobs:
           stylelint "LINT-30/**/*.css"
 
           echo "=== Linting Lint-75 ==="
-          htmlhint "Lint-75/**/*.html"
-          stylelint "Lint-75/**/*.css"
+          htmlhint "LINT-75/**/*.html"
+          stylelint "LINT-75/**/*.css"
 
           echo "=== Linting WCAG-20 ==="
           htmlhint "WCAG-20/**/*.html"
