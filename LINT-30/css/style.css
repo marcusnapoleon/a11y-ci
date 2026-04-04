@@ -98,7 +98,7 @@ fieldset {
     font-size: 1em;
     height: 40px;
     width: 96px;
-    border: 0px solid;
+    border: 0 solid;
 }
 
 textarea {
