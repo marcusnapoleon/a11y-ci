@@ -23,30 +23,44 @@ jobs:
           node-version: '20'
 
       - name: Install linters
-        run: npm install -g htmlhint stylelint stylelint-config-standard
+        run: |
+          npm install -g htmlhint stylelint stylelint-config-standard
+          npm install -g eslint eslint-plugin-jsx-a11y
 
-      - name: Lint progression folders
+      - name: Lint HTML/CSS (remediation stages)
         run: |
           echo "=== Linting Lint-30 ==="
-          htmlhint "Lint-30/**/*.html" || true
-          stylelint "Lint-30/**/*.css" || true
+          htmlhint "Lint-30/**/*.html"
+          stylelint "Lint-30/**/*.css"
 
           echo "=== Linting Lint-75 ==="
-          htmlhint "Lint-75/**/*.html" || true
-          stylelint "Lint-75/**/*.css" || true
+          htmlhint "Lint-75/**/*.html"
+          stylelint "Lint-75/**/*.css"
 
-          echo "=== Linting wcag-2.0 ==="
-          htmlhint "WCAG-20/**/*.html" || true
-          stylelint "WCAG-20/**/*.css" || true
+          echo "=== Linting WCAG-20 ==="
+          htmlhint "WCAG-20/**/*.html"
+          stylelint "WCAG-20/**/*.css"
 
-          echo "=== Linting wcag-2.1 ==="
-          htmlhint "WCAG-21/**/*.html" || true
-          stylelint "WCAG-21/**/*.css" || true
+          echo "=== Linting WCAG-21 ==="
+          htmlhint "WCAG-21/**/*.html"
+          stylelint "WCAG-21/**/*.css"
 
-          echo "=== Linting docs ==="
+          echo "=== Linting Accessible ==="
           htmlhint "Accessible/**/*.html"
           stylelint "Accessible/**/*.css"
-         
+
+          echo "=== Linting Components ==="
+          htmlhint "components/**/*.html"
+          stylelint "components/**/*.css"
+
+      - name: Lint JavaScript (ESLint)
+        run: |
+          if find components -name "*.js" 2>/dev/null | grep -q .; then
+            eslint "components/**/*.js" --max-warnings=0
+          else
+            echo "No JavaScript files found — skipping ESLint"
+          fi
+
   axe:
     runs-on: ubuntu-latest
     needs: lint
@@ -67,19 +81,27 @@ jobs:
       - name: Install matching ChromeDriver
         run: npx browser-driver-manager install chrome
 
-      - name: Run axe on progression versions
+      - name: Run axe on progression versions and components
         run: |
           npx serve . -p 8080 &
           sleep 5
 
-          echo "=== Testing wcag-2.0 ==="
+          echo "=== Testing WCAG-20 ==="
           npx axe http://localhost:8080/WCAG-20/index.html --exit
           
-          echo "=== Testing wcag-2.1 ==="
+          echo "=== Testing WCAG-21 ==="
           npx axe http://localhost:8080/WCAG-21/index.html --exit
 
-          echo "=== Testing Accessible wcag-2.2==="
+          echo "=== Testing Accessible (WCAG 2.2) ==="
           npx axe http://localhost:8080/Accessible/index.html --exit
+
+          echo "=== Testing Components ==="
+          for component in accordion tabs modal photo-viewer slider; do
+            if [ -d "components/$component" ]; then
+              echo "Testing $component..."
+              npx axe http://localhost:8080/components/$component/index.html --exit
+            fi
+          done
 
           kill $(lsof -t -i:8080) || true
 
@@ -105,13 +127,11 @@ jobs:
           npx serve . -p 8080 &
           sleep 5
           
-          # Run Lighthouse and save JSON
           npx lighthouse http://localhost:8080/Accessible/index.html \
             --output json \
             --output-path lh.json \
             --chrome-flags="--headless" || true
           
-          # Extract scores
           echo "PERFORMANCE=$(jq '.categories.performance.score * 100 | floor' lh.json)" >> $GITHUB_OUTPUT
           echo "ACCESSIBILITY=$(jq '.categories.accessibility.score * 100 | floor' lh.json)" >> $GITHUB_OUTPUT
           echo "BEST_PRACTICES=$(jq '.categories["best-practices"].score * 100 | floor' lh.json)" >> $GITHUB_OUTPUT
@@ -127,6 +147,8 @@ jobs:
 
       - name: Post PR Comment
         uses: actions/github-script@v7
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           script: |
             const perf = ${{ steps.lighthouse.outputs.PERFORMANCE }};
@@ -145,9 +167,11 @@ jobs:
             ### ✅ Accessibility Checks
             - HTML Lint: Passed
             - CSS Lint: Passed
+            - JavaScript Lint: Passed (ESLint)
             - WCAG 2.0 AA: Passed
             - WCAG 2.1 AA: Passed
             - WCAG 2.2 AA: Passed
+            - Accessible Components: Passed
             
             ### 📄 Full Report
             To download the complete Lighthouse report:
