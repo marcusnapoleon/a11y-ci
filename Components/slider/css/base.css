@@ -15,7 +15,7 @@ body {
 .panel {
   background-color: #fff;
   color: #666;
-  box-shadow: rgb(255 0 0 / 50%);
+  box-shadow: rgba(255, 0, 0, 0.5);
   overflow: auto;}
 
 .slider-panel {
