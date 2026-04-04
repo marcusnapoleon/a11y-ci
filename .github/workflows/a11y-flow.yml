@@ -55,7 +55,8 @@ jobs:
 
       - name: Lint JavaScript (ESLint)
         run: |
-          if find components -name "*.js" 2>/dev/null | grep -q .; then
+          if find Components -name "*.js" 2>/dev/null | grep -q .; then
+            echo "=== Linting JavaScript ==="
             eslint "Components/**/*.js" --max-warnings=0
           else
             echo "No JavaScript files found — skipping ESLint"
