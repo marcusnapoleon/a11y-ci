@@ -21,44 +21,42 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'npm'
 
-      - name: Install linters
-        run: |
-          
-          npm install -g htmlhint stylelint stylelint-config-standard
-          npm install -g eslint eslint-plugin-jsx-a11y globals
+      - name: Install dependencies
+        run: npm ci
 
       - name: Lint HTML/CSS (remediation stages)
         run: |
           echo "=== Linting Lint-30 ==="
-          htmlhint "LINT-30/**/*.html"
-          stylelint "LINT-30/**/*.css"
+          npx htmlhint "LINT-30/**/*.html"
+          npx stylelint "LINT-30/**/*.css"
 
           echo "=== Linting Lint-75 ==="
-          htmlhint "LINT-75/**/*.html"
-          stylelint "LINT-75/**/*.css"
+          npx htmlhint "LINT-75/**/*.html"
+          npx stylelint "LINT-75/**/*.css"
 
           echo "=== Linting WCAG-20 ==="
-          htmlhint "WCAG-20/**/*.html"
-          stylelint "WCAG-20/**/*.css"
+          npx htmlhint "WCAG-20/**/*.html"
+          npx stylelint "WCAG-20/**/*.css"
 
           echo "=== Linting WCAG-21 ==="
-          htmlhint "WCAG-21/**/*.html"
-          stylelint "WCAG-21/**/*.css"
+          npx htmlhint "WCAG-21/**/*.html"
+          npx stylelint "WCAG-21/**/*.css"
 
           echo "=== Linting Accessible ==="
-          htmlhint "Accessible/**/*.html"
-          stylelint "Accessible/**/*.css"
+          npx htmlhint "Accessible/**/*.html"
+          npx stylelint "Accessible/**/*.css"
 
           echo "=== Linting Components ==="
-          htmlhint "Components/**/*.html"
-          stylelint "Components/**/*.css"
+          npx htmlhint "Components/**/*.html"
+          npx stylelint "Components/**/*.css"
 
       - name: Lint JavaScript (ESLint)
         run: |
           if find Components -name "*.js" 2>/dev/null | grep -q .; then
             echo "=== Linting JavaScript ==="
-            eslint "Components/**/*.js" --max-warnings=0
+            npx eslint "Components/**/*.js" --max-warnings=0
           else
             echo "No JavaScript files found — skipping ESLint"
           fi
@@ -73,8 +71,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'npm'
 
-      - name: Install serve, axe-core, and browser-driver-manager
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install global tools
         run: |
           npm install -g serve
           npm install -g @axe-core/cli
@@ -117,8 +119,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'npm'
 
-      - name: Install serve and Lighthouse
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install global tools
         run: |
           npm install -g serve
           npm install -g lighthouse
