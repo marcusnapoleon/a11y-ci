@@ -50,13 +50,13 @@ jobs:
           stylelint "Accessible/**/*.css"
 
           echo "=== Linting Components ==="
-          htmlhint "components/**/*.html"
-          stylelint "components/**/*.css"
+          htmlhint "Components/**/*.html"
+          stylelint "Components/**/*.css"
 
       - name: Lint JavaScript (ESLint)
         run: |
           if find components -name "*.js" 2>/dev/null | grep -q .; then
-            eslint "components/**/*.js" --max-warnings=0
+            eslint "Components/**/*.js" --max-warnings=0
           else
             echo "No JavaScript files found — skipping ESLint"
           fi
@@ -97,9 +97,9 @@ jobs:
 
           echo "=== Testing Components ==="
           for component in accordion tabs modal photo-viewer slider; do
-            if [ -d "components/$component" ]; then
+            if [ -d "Components/$component" ]; then
               echo "Testing $component..."
-              npx axe http://localhost:8080/components/$component/index.html --exit
+              npx axe http://localhost:8080/Components/$component/index.html --exit
             fi
           done
 
