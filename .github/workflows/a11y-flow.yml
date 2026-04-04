@@ -30,8 +30,8 @@ jobs:
       - name: Lint HTML/CSS (remediation stages)
         run: |
           echo "=== Linting Lint-30 ==="
-          htmlhint "Lint-30/**/*.html"
-          stylelint "Lint-30/**/*.css"
+          htmlhint "LINT-30/**/*.html"
+          stylelint "LINT-30/**/*.css"
 
           echo "=== Linting Lint-75 ==="
           htmlhint "Lint-75/**/*.html"
