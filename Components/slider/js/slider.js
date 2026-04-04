@@ -1,14 +1,14 @@
 
 $('.slider').each(function() {              // For every slider
-  var $this   = $(this);                    // Current slider
-  var $group  = $this.find('.slide-group'); // Get the slide-group (container)
-  var $slides = $this.find('.slide');       // Create jQuery object to hold all slides
-  var buttonArray  = [];                    // Create array to hold navigation buttons
-  var currentIndex = 0;                     // Hold index number of the current slide
-  var timeout;                              // Sets gap between auto-sliding
+  let $this   = $(this);                    // Current slider
+  let $group  = $this.find('.slide-group'); // Get the slide-group (container)
+  let $slides = $this.find('.slide');       // Create jQuery object to hold all slides
+  let buttonArray  = [];                    // Create array to hold navigation buttons
+  let currentIndex = 0;                     // Hold index number of the current slide
+  let timeout;                              // Sets gap between auto-sliding
 
   function move(newIndex) {          // Creates the slide from old to new one
-    var animateLeft, slideLeft;      // Declare variables
+    let animateLeft, slideLeft;      // Declare variables
 
     advance();                       // When slide moves, call advance() again
 
@@ -51,7 +51,7 @@ $('.slider').each(function() {              // For every slider
 
   $.each($slides, function(index) {
     // Create a button element for the button
-    var $button = $('<button type="button" class="slide-btn">&bull;</button>');
+    let $button = $('<button type="button" class="slide-btn">&bull;</button>');
     if (index === currentIndex) {    // If index is the current item
       $button.addClass('active');    // Add the active class
     }
