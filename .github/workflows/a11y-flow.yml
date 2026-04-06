@@ -39,13 +39,13 @@ jobs:
           npx htmlhint "Axsbl_Components/slider/LINT-75/**/*.html" || true
           npx htmlhint "Axsbl_Components/slider/WCAG-20/**/*.html" || true
           npx htmlhint "Axsbl_Components/slider/WCAG-21/**/*.html" || true
-          npx htmlhint "Axsbl_Components/slider/Accessible/**/*.html"
+          npx htmlhint "Axsbl_Components/slider/Axsbl-Slider/**/*.html"
 
           npx htmlhint "Axsbl_Components/modal/LINT-30/**/*.html" || true
           npx htmlhint "Axsbl_Components/modal/LINT-75/**/*.html" || true
           npx htmlhint "Axsbl_Components/modal/WCAG-20/**/*.html" || true
           npx htmlhint "Axsbl_Components/modal/WCAG-21/**/*.html" || true
-          npx htmlhint "Axsbl_Components/modal/Accessible/**/*.html"
+          npx htmlhint "Axsbl_Components/modal/Axsbl-Modal/**/*.html"
 
       - name: Lint CSS (Remediation Stages in cd-dev)
         run: |
@@ -61,13 +61,13 @@ jobs:
           npx stylelint "Axsbl_Components/slider/LINT-75/**/*.css" || true
           npx stylelint "Axsbl_Components/slider/WCAG-20/**/*.css" || true
           npx stylelint "Axsbl_Components/slider/WCAG-21/**/*.css" || true
-          npx stylelint "Axsbl_Components/slider/Accessible/**/*.css"
+          npx stylelint "Axsbl_Components/slider/Axsbl-Slider/**/*.css"
 
           npx stylelint "Axsbl_Components/modal/LINT-30/**/*.css" || true
           npx stylelint "Axsbl_Components/modal/LINT-75/**/*.css" || true
           npx stylelint "Axsbl_Components/modal/WCAG-20/**/*.css" || true
           npx stylelint "Axsbl_Components/modal/WCAG-21/**/*.css" || true
-          npx stylelint "Axsbl_Components/modal/Accessible/**/*.css"
+          npx stylelint "Axsbl_Components/modal/Axsbl-Modal/**/*.css"
 
   eslint:
     runs-on: ubuntu-latest
@@ -97,8 +97,8 @@ jobs:
           npx eslint "Axsbl_Components/modal/WCAG-21/**/*.js" --max-warnings=0 || true
 
           echo "=== Fully Remediated Components (Must pass) ==="
-          npx eslint "Axsbl_Components/slider/Accessible/**/*.js" --max-warnings=0
-          npx eslint "Axsbl_Components/modal/Accessible/**/*.js" --max-warnings=0
+          npx eslint "Axsbl_Components/slider/Axsbl-Slider/**/*.js" --max-warnings=0
+          npx eslint "Axsbl_Components/modal/Axsbl-Modal/**/*.js" --max-warnings=0
 
   axe:
     runs-on: ubuntu-latest
@@ -136,11 +136,11 @@ jobs:
           echo "=== Component Remediation Stages ==="
           npx axe http://localhost:8080/Axsbl_Components/slider/WCAG-20/index.html --exit || true
           npx axe http://localhost:8080/Axsbl_Components/slider/WCAG-21/index.html --exit || true
-          npx axe http://localhost:8080/Axsbl_Components/slider/Accessible/index.html --exit
+          npx axe http://localhost:8080/Axsbl_Components/slider/Axsbl-Slider/index.html --exit
 
           npx axe http://localhost:8080/Axsbl_Components/modal/WCAG-20/index.html --exit || true
           npx axe http://localhost:8080/Axsbl_Components/modal/WCAG-21/index.html --exit || true
-          npx axe http://localhost:8080/Axsbl_Components/modal/Accessible/index.html --exit
+          npx axe http://localhost:8080/Axsbl_Components/modal/Axsbl-Modal/index.html --exit
 
           kill $(lsof -t -i:8080) || true
 
