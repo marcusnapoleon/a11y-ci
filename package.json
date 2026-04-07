@@ -1,0 +1,12 @@
+{
+  "name": "a11y-ci",
+  "version": "1.0.0",
+  "devDependencies": {
+    "eslint": "^9.0.0",
+    "eslint-plugin-jsx-a11y": "^6.10.0",
+    "globals": "^15.0.0",
+    "htmlhint": "^1.1.0",
+    "stylelint": "^16.0.0",
+    "stylelint-config-standard": "^36.0.0"
+  }
+}

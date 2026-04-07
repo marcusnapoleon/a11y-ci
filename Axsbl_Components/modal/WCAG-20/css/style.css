@@ -1,0 +1,8 @@
+
+
+/* 1. Global Reset: Removes default browser margins/padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}

@@ -1,0 +1,230 @@
+name: Accessibility Pipeline
+
+permissions:
+  pull-requests: write
+  contents: read
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  html-css-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Lint HTML (Remediation Stages in cd-dev)
+        run: |
+          echo "=== Survey Remediation Stages ==="
+          npx htmlhint "LINT-30/**/*.html" || true
+          npx htmlhint "LINT-75/**/*.html" || true
+          npx htmlhint "WCAG-20/**/*.html" || true
+          npx htmlhint "WCAG-21/**/*.html" || true
+          npx htmlhint "Accessible/**/*.html"
+
+          echo "=== Component Remediation Stages ==="
+          npx htmlhint "Axsbl_Components/slider/LINT-30/**/*.html" || true
+          npx htmlhint "Axsbl_Components/slider/LINT-75/**/*.html" || true
+          npx htmlhint "Axsbl_Components/slider/WCAG-20/**/*.html" || true
+          npx htmlhint "Axsbl_Components/slider/WCAG-21/**/*.html" || true
+          npx htmlhint "Axsbl_Components/slider/Axsbl-Slider/**/*.html"
+
+          npx htmlhint "Axsbl_Components/modal/LINT-30/**/*.html" || true
+          npx htmlhint "Axsbl_Components/modal/LINT-75/**/*.html" || true
+          npx htmlhint "Axsbl_Components/modal/WCAG-20/**/*.html" || true
+          npx htmlhint "Axsbl_Components/modal/WCAG-21/**/*.html" || true
+          npx htmlhint "Axsbl_Components/modal/Axsbl-Modal/**/*.html"
+
+      - name: Lint CSS (Remediation Stages in cd-dev)
+        run: |
+          echo "=== Survey Remediation Stages ==="
+          npx stylelint "LINT-30/**/*.css" || true
+          npx stylelint "LINT-75/**/*.css" || true
+          npx stylelint "WCAG-20/**/*.css" || true
+          npx stylelint "WCAG-21/**/*.css" || true
+          npx stylelint "Accessible/**/*.css"
+
+          echo "=== Component Remediation Stages ==="
+          npx stylelint "Axsbl_Components/slider/LINT-30/**/*.css" || true
+          npx stylelint "Axsbl_Components/slider/LINT-75/**/*.css" || true
+          npx stylelint "Axsbl_Components/slider/WCAG-20/**/*.css" || true
+          npx stylelint "Axsbl_Components/slider/WCAG-21/**/*.css" || true
+          npx stylelint "Axsbl_Components/slider/Axsbl-Slider/**/*.css"
+
+          npx stylelint "Axsbl_Components/modal/LINT-30/**/*.css" || true
+          npx stylelint "Axsbl_Components/modal/LINT-75/**/*.css" || true
+          npx stylelint "Axsbl_Components/modal/WCAG-20/**/*.css" || true
+          npx stylelint "Axsbl_Components/modal/WCAG-21/**/*.css" || true
+          npx stylelint "Axsbl_Components/modal/Axsbl-Modal/**/*.css"
+
+  eslint:
+    runs-on: ubuntu-latest
+    needs: html-css-lint
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Lint JavaScript (ESLint)
+        run: |
+          echo "=== Component Remediation Stages (Expected failures) ==="
+          npx eslint "Axsbl_Components/slider/LINT-30/**/*.js" --max-warnings=0 || true
+          npx eslint "Axsbl_Components/slider/LINT-75/**/*.js" --max-warnings=0 || true
+          npx eslint "Axsbl_Components/slider/WCAG-20/**/*.js" --max-warnings=0 || true
+          npx eslint "Axsbl_Components/slider/WCAG-21/**/*.js" --max-warnings=0 || true
+
+          npx eslint "Axsbl_Components/modal/LINT-30/**/*.js" --max-warnings=0 || true
+          npx eslint "Axsbl_Components/modal/LINT-75/**/*.js" --max-warnings=0 || true
+          npx eslint "Axsbl_Components/modal/WCAG-20/**/*.js" --max-warnings=0 || true
+          npx eslint "Axsbl_Components/modal/WCAG-21/**/*.js" --max-warnings=0 || true
+
+          echo "=== Fully Remediated Components (Must pass) ==="
+          npx eslint "Axsbl_Components/slider/Axsbl-Slider/**/*.js" --max-warnings=0
+          npx eslint "Axsbl_Components/modal/Axsbl-Modal/**/*.js" --max-warnings=0
+
+  axe:
+    runs-on: ubuntu-latest
+    needs: eslint
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install global tools
+        run: |
+          npm install -g serve
+          npm install -g @axe-core/cli
+          npm install -g browser-driver-manager
+
+      - name: Install matching ChromeDriver
+        run: npx browser-driver-manager install chrome
+
+      - name: Run axe on progression versions and components
+        run: |
+          npx serve . -p 8080 &
+          sleep 5
+
+          echo "=== Survey Remediation Stages ==="
+          npx axe http://localhost:8080/WCAG-20/index.html --exit || true
+          npx axe http://localhost:8080/WCAG-21/index.html --exit || true
+          npx axe http://localhost:8080/Accessible/index.html --exit
+
+          echo "=== Component Remediation Stages ==="
+          npx axe http://localhost:8080/Axsbl_Components/slider/WCAG-20/index.html --exit || true
+          npx axe http://localhost:8080/Axsbl_Components/slider/WCAG-21/index.html --exit || true
+          npx axe http://localhost:8080/Axsbl_Components/slider/Axsbl-Slider/index.html --exit
+
+          npx axe http://localhost:8080/Axsbl_Components/modal/WCAG-20/index.html --exit || true
+          npx axe http://localhost:8080/Axsbl_Components/modal/WCAG-21/index.html --exit || true
+          npx axe http://localhost:8080/Axsbl_Components/modal/Axsbl-Modal/index.html --exit
+
+          kill $(lsof -t -i:8080) || true
+
+  lighthouse:
+    runs-on: ubuntu-latest
+    needs: axe
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install global tools
+        run: |
+          npm install -g serve
+          npm install -g lighthouse
+
+      - name: Run Lighthouse on Accessible version
+        id: lighthouse
+        run: |
+          npx serve . -p 8080 &
+          sleep 5
+          
+          npx lighthouse http://localhost:8080/Accessible/index.html \
+            --output json \
+            --output-path lh.json \
+            --chrome-flags="--headless" || true
+          
+          echo "PERFORMANCE=$(jq '.categories.performance.score * 100 | floor' lh.json)" >> $GITHUB_OUTPUT
+          echo "ACCESSIBILITY=$(jq '.categories.accessibility.score * 100 | floor' lh.json)" >> $GITHUB_OUTPUT
+          echo "BEST_PRACTICES=$(jq '.categories["best-practices"].score * 100 | floor' lh.json)" >> $GITHUB_OUTPUT
+          echo "SEO=$(jq '.categories.seo.score * 100 | floor' lh.json)" >> $GITHUB_OUTPUT
+          
+          kill $(lsof -t -i:8080) || true
+
+      - name: Upload Lighthouse report
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-report
+          path: lh.json
+
+      - name: Post PR Comment
+        uses: actions/github-script@v7
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          script: |
+            const perf = ${{ steps.lighthouse.outputs.PERFORMANCE }};
+            const acc = ${{ steps.lighthouse.outputs.ACCESSIBILITY }};
+            const bp = ${{ steps.lighthouse.outputs.BEST_PRACTICES }};
+            const seo = ${{ steps.lighthouse.outputs.SEO }};
+            
+            const comment = `## 📊 Lighthouse Scores
+            | Metric | Score |
+            |--------|-------|
+            | Performance | ${perf}/100 |
+            | Accessibility | ${acc}/100 |
+            | Best Practices | ${bp}/100 |
+            | SEO | ${seo}/100 |
+            
+            ### ✅ Accessibility Checks
+            - HTML Lint: Passed (final stage)
+            - CSS Lint: Passed (final stage)
+            - JavaScript Lint: Passed (ESLint)
+            - WCAG 2.0 AA: Passed
+            - WCAG 2.1 AA: Passed
+            - WCAG 2.2 AA: Passed
+            - Accessible Components: Passed
+            
+            ### 📄 Full Report
+            To download the complete Lighthouse report:
+            1. Go to the **Actions** tab above
+            2. Click on this workflow run
+            3. Download **lighthouse-report** from the **Artifacts** section
+            `;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });

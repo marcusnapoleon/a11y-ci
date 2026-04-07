@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta name="description" content="A responsive survey form built in 2019 for freeCodeCamp, remediated March 2026 for accessibility.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8">
+        <title>Accessible freeCodeCamp Survey Form Project</title>
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Poiret+One">    
+		
+        <!-- Favicon -->
+        <link rel="icon" type="image/x-icon" href="favicon/favicon.ico">
+		<link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+		<link rel="icon" type="image/png" sizes="192x192" href="favicon/android-chrome-192x192.png">
+		<link rel="icon" type="image/png" sizes="512x512" href="favicon/android-chrome-512x512.png">
+		<link rel="manifest" href="favicon/site.webmanifest">
+		
+    </head>
+
+<body id="form-container" cz-shortcut-listen="true" data-new-gr-c-s-check-loaded="14.1274.0" data-gr-ext-installed="" data-new-gr-c-s-loaded="14.1274.0">
+
+    <main>
+        <h1 id="title">Game Subscription Service Form</h1>
+   
+    <p id="description">
+        <em>Please kindly complete the form below, fields marked with "<span id="out_star" aria-hidden="true">*</span>" are required.</em>
+    </p>
+    
+
+
+    <form id="survey-form">
+
+        <div class="rowTab">
+            <div class="labels">
+                <label for="name" id="name-label"><sup><span class="required-star" aria-hidden="true">*</span></sup>Name:</label>
+            </div>
+            <div class="rightTab">
+                <input type="text" id="name" name="user_name" placeholder="Enter your name..." autocomplete="name" required="" class="inpt">
+            </div>
+        </div>
+
+
+        <div class="rowTab">
+            <div class="labels">
+                <label for="email" id="email-label"><sup> <span class="required-star" aria-hidden="true">*</span></sup>Email:</label>
+            </div>
+            <div class="rightTab">
+                <input type="email" id="email" 
+                    pattern="[a-zA-Z0-9.!#$%&'*+/=?^_{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*" 
+                    title="Please enter a valid email address (e.g., name@domain.com)" 
+                    placeholder="email@sample.com" autocomplete="email" class="inpt" required>
+            </div>
+        </div>
+
+
+        <div class="rowTab">
+            <div class="labels">
+                <label for="number" id="number-label"><sup> <span class="required-star" aria-hidden="true">*</span></sup>Phone Number:</label>
+            </div>
+            <div class="rightTab">
+                <input type="tel" id="number" placeholder="123 456 7890" 
+               pattern="[0-9\s\-]{10,}" 
+               title="Please enter a valid phone number with 10 digits (e.g., 123 456 7890)" 
+               autocomplete="tel" class="inpt" required>
+            </div>
+        </div>
+
+
+        <div class="rowTab">
+    <div class="labels">
+        <!-- 1. Linked 'for' to the select 'id' -->
+        <!-- 2. Hidden the asterisk from screen readers to avoid "Star Gamer Level" -->
+        <label for="gamer-dropdown" id="dropdown-label">
+            <span class="required-star" aria-hidden="true">*</span>Gamer Level/Experience:
+        </label>
+    </div>
+    <div class="rightTab">
+        <select id="gamer-dropdown" name="gamer_experience" class="inpt" autocomplete="off" required="" aria-required="true">
+            
+            <!-- 3. Added a clear instructional default option -->
+            <option value="">-- Select your experience level --</option>
+            <option value="casual">Casual Gamer - 2 to 5 hours gametime/week</option>
+            <option value="regular">Regular - 5 to 12 hours gametime/week</option>
+            <option value="advanced">Advanced - 12 to 25 hours gametime/week</option>
+            <option value="pro">Pro - 25 hours or more gametime/week</option>
+        </select>
+    </div>
+</div>
+
+<div class="columns-wrapper">
+        <div class="column">
+            <fieldset id="radioBtn">
+                <legend>How do you game?</legend>
+                <p>
+                    <label><input type="radio" name="game-rig" value="SONY-Playstation" required=""> 
+                        SONY Playstation
+                    </label>
+                    <label><input type="radio" name="game-rig" value="Microsoft-XBOX"> 
+                        Microsoft XBOX
+                    </label>
+                    <label><input type="radio" name="game-rig" value="Nintendo-Entertainment-Systems"> 
+                        Nintendo (NES)
+                    </label>
+                    <label><input type="radio" name="game-rig" value="Android/iOS"> 
+                        Android/iOS
+                    </label>
+                    <label><input type="radio" name="game-rig" value="Gaming-PC/Laptop"> 
+                        Gaming PC/Laptop
+                    </label>
+                </p>
+            </fieldset>
+        </div>
+
+        <div class="column">
+            <fieldset id="checkBox">
+                <legend>What do you play?</legend>
+                <p>
+		            <label><input type="checkbox" name="game-genre" value="Action"> 
+			            Action
+		            </label>
+                    <label><input type="checkbox" name="game-genre" value="Action/Adventure"> 
+                        Action/Adventure
+		            </label>
+                    <label><input type="checkbox" name="game-genre" value="Adventure"> 
+			            Adventure
+		            </label>
+                    <label><input type="checkbox" name="game-genre" value="Role-playing"> 
+			            Role-playing
+		            </label>
+                    <label><input type="checkbox" name="game-genre" value="Simulation"> 
+			            Simulation
+		            </label>
+                    <label><input type="checkbox" name="game-genre" value="Strategy"> 
+			            Strategy
+		            </label>
+                    <label><input type="checkbox" name="game-genre" value="Sports"> 
+			            Sports
+                    </label>
+                </p>
+            </fieldset>
+        </div>
+</div>
+
+
+<!-- 1. The Label now correctly uses 'for="comments"' to match the Textarea ID -->
+<label for="comments" id="cmts">
+    We'd love to hear from you, please kindly provide any comments or suggestions:
+</label>
+<!-- 2. The Textarea now has the ID 'comments' to complete the programmatic link -->
+<textarea id="comments" placeholder="Enter your comments here" autocomplete="off" spellcheck="false"></textarea>
+
+
+<button type="submit" id="submit" aria-label="click to submit survey form">
+  Submit
+</button>
+
+    </form>
+</main>
+
+
+<footer>
+    <p id="built">Site built by Marcus Lising for educational purposes (freeCodeCamp) </p>
+<!--   
+  <p>
+<a href="http://jigsaw.w3.org/css-validator/check/referer">
+    <img style="border:0;width:88px;height:31px" src="http://jigsaw.w3.org/css-validator/images/vcss-blue" alt="Valid CSS!"></img>
+    </a>
+</p>-->
+
+</footer>
+
+<!-- freeCodeCamp script for project validation/check 
+<script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script><div id="fcc_test_suite_wrapper" style="position: relative !important; z-index: 99999 !important;"></div>
+
+
+-->
+</body></html>

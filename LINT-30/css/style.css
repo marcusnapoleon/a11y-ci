@@ -1,0 +1,122 @@
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+html,
+body {
+    box-sizing: border-box;
+    color: #000;
+    background: linear-gradient(to top left, #99ff99 0%, #0066cc 100%);
+    text-align: center;
+    font-family: "Roboto", Helvetica, sans-serif;
+    font-size: 1em;
+}
+
+#title {
+    font-family: "Poiret One", cursive;
+    color: white;
+    font-size: 2.5em;
+}
+
+#description {
+    width: 80%;
+    margin: 0 auto;
+    font-family: "Poiret One", cursive;
+    color: white;
+}
+
+#survey-form {
+    max-width: 800px;
+    margin: 30px auto 50px;
+    background-color: ghostwhite;
+    border-radius: 5px;
+    padding: 30px 20px 20px;
+}
+
+.labels {
+    display: inline-block;
+    text-align: right;
+    width: 40%;
+    padding: 5px;
+    vertical-align: top;
+    margin-top: 10px;
+}
+
+.rightTab {
+    display: inline-block;
+    text-align: left;
+    width: 48%;
+    vertical-align: middle;
+}
+
+.inpt {
+    height: 30px;
+    width: 280px;
+    padding: 5px;
+    margin: 10px;
+    border: 1px solid #c0c0c0;
+    border-radius: 5px;
+}
+
+.column {
+    float: left;
+    width: 50%;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+fieldset {
+    border-radius: 5px;
+}
+
+#radioBtn {
+    height: 250px;
+    text-align: left;
+    border: 1px solid cadetblue;
+}
+
+#radioBtn input {
+    margin-left: 50px;
+}
+
+#checkBox {
+    height: 250px;
+    text-align: left;
+    border: 1px solid cadetblue;
+}
+
+#checkBox input {
+    margin-left: 50px;
+}
+
+#submit {
+    background-color: cadetblue;
+    border-radius: 5px;
+    color: white;
+    font-size: 1em;
+    height: 40px;
+    width: 96px;
+    border: 0 solid;
+}
+
+textarea {
+    width: 60%;
+    height: 80px;
+    border-radius: 5px;
+}
+
+#cmts {
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 0.8em;
+}
+
+#built {
+    color: white;
+    font-size: 1em;
+    font-style: italic;
+    font-family: "Poiret One", cursive;
+}
